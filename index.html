@@ -286,7 +286,7 @@
                         'Access-Control-Allow-Origin': '*'
                     },
                     secure: true,
-                    dataType: 'jsonp',
+                    dataType: 'json',
                     success: function (result) {
                         $('#results-map-card').slideDown();
                         $('#json-results').html(JSON.stringify(result, undefined, 2))
