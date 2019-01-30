@@ -1,4 +1,4 @@
-# [ipMapper](https://ipmapper.ostrike.com/)
+# [ipMapper](http://ipmapper.ostrike.com/)
 
 <h4>!~~ In Progress ~~!</h4>
 
