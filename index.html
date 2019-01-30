@@ -233,7 +233,7 @@
             };
 
             let getIpApiJson = function (ipOrHostname) {
-                let h = "http://ip-api.com/json/" + ipOrHostname;
+                let h = "http://ip-api.com/json/" + String(ipOrHostname);
                 $.ajax(h, {
                     dataType: 'json',
                     success: function (result) {
