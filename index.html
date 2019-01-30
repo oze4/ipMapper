@@ -277,7 +277,7 @@
             };
 
             let getIpJsonFromIpApi = function (ipOrHostname) {
-                let h = "https://cors-anywhere.herokuapp.com/http://ip-api.com/json/" + String(ipOrHostname);
+                let h = "http://ip-api.com/json/" + String(ipOrHostname);
                 $.ajax(h, {
                     type: "GET",
                     dataType: 'json',
