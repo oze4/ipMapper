@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 mx-auto is-slider" id="card-map-by-lat-long">
+            <div class="col-md-8 mx-auto is-hidden" id="card-map-by-lat-long">
                 <div class="card m-t-20">
                     <div class="card-header">
                         <h5 class="m-b-0">Enter Latitude and Longitude</h5>
@@ -78,25 +78,48 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-primary disabled" id="btn-generate-by-latlon">Generate Map</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-8 mx-auto is-slider" id="card-map-by-ip">
+            <div class="col-md-8 mx-auto is-hidden" id="card-map-by-ip">
                 <div class="card m-t-20">
                     <div class="card-header">
-                        <h5 class="m-b-0" style="float:left;">Select IP API Provider</h5>
-                        <div style="float:right;">
-                            <span class="badge badge-danger">key</span><small> means API key is required</small>
+                        <h5 class="m-b-0">Select IP API Provider</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="badge badge-danger">key</span><small> means API key is required</small>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row m-t-10">
-                            <div class="form-group mx-auto">
+                            <div class="form-group mx-auto" style="border: 1px solid black;">
                                 <select class="selectpicker" id="select-ip-api-provider">
+                                    <option>-</option>
                                     <option>http://ip-api.com</option>
                                     <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>">http://ipstack.com</option>
                                 </select>
                             </div>
                         </div>
+                        <div class="row m-t-10 is-hidden" id="api-key-slider">
+                            <div class="col-md-6 mx-auto">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter API Key" id="api-key-textbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-10 is-hidden" id="hostname-or-ip-slider">
+                            <div class="col-md-6 mx-auto">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="hostname-or-ip-textbox" placeholder="Enter Hostname or IP">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-primary disabled" id="btn-generate-by-ip">Generate Map</button>
                     </div>
                 </div>
             </div>
@@ -117,6 +140,7 @@
 
     <script>
         $(function () {
+
             $('#option-enter-ip').on('click', function () {
                 $(this).parent().addClass('btn-primary');
                 $('#option-enter-lat-long').parent().removeClass('btn-primary');
@@ -132,6 +156,58 @@
                     $('#card-map-by-lat-long').slideDown('slow');
                 });
             });
+
+            $('#api-key-textbox').on('input', function () {
+                if ($(this).val().length > 5) {
+                    $('#hostname-or-ip-slider').slideDown('slow');
+                } else {
+                    $('#hostname-or-ip-slider').slideUp('slow');
+                }
+            });
+
+            $('#hostname-or-ip-textbox').on('input', function () {
+                if ($(this).val().length > 3) {
+                    $('#btn-generate-by-ip').removeClass('disabled');
+                } else {
+                    $('#btn-generate-by-ip').addClass('disabled');
+                }
+            });
+
+            $('#select-ip-api-provider').on('change', function () {
+                let provider = $(this).val();
+                if (provider != "-") {
+                    if (provider === "http://ip-api.com") {
+                        $('#api-key-slider').slideUp('slow');
+                        $('#hostname-or-ip-slider').slideDown('slow');
+                    }
+                    if (provider === "http://ipstack.com") {
+                        $('#hostname-or-ip-slider').slideUp('slow');
+                        $('#api-key-slider').slideDown('slow');
+                    }
+                } else {
+                    $('#api-key-slider').slideUp('slow');
+                    $('#hostname-or-ip-slider').slideUp('slow');
+                }
+                $('#api-key-textbox').val("");
+                $('#hostname-or-ip-textbox').val("");
+            });
+
+            let checkEnableLatLonGenerateMapButton = function () {
+                if ($('#search-latitude').val().length > 0 & $('#search-longitude').val().length > 0) {
+                    $('#btn-generate-by-latlon').removeClass('disabled');
+                } else {
+                    $('#btn-generate-by-latlon').addClass('disabled');
+                }
+            };
+
+            $('#search-latitude').on('input', function () {
+                checkEnableLatLonGenerateMapButton();
+            });
+
+            $('#search-longitude').on('input', function () {
+                checkEnableLatLonGenerateMapButton();
+            });
+
         })
     </script>
 
@@ -163,8 +239,16 @@
             color: lightgray;
         }
 
-        .is-slider {
+        .is-hidden {
             display: none;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+        }
+
+        .fl-l {
+            float: left;
         }
 
         html body .m-0 {
