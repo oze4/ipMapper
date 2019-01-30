@@ -144,7 +144,7 @@
                                     <input type="text" class="form-control" id="hostname-or-ip-textbox" placeholder="Enter Hostname or IP">
                                     <!-- USE CURRENT IP -->
                                     <div class="inline-field m-t-0">
-                                        <input type="checkbox" class="form-check" id="use-current-connection">
+                                        <input type="checkbox" class="form-check" id="use-current-connection-checkbox">
                                         <label for="use-current-connection">
                                             <small> Use Current IP</small>
                                         </label>
@@ -242,12 +242,17 @@
             let getIpData = function () {
                 let provider = $('#select-ip-api-provider').val();
                 if (provider === "http://ip-api.com") {
-                    let h = $('#hostname-or-ip-textbox').val();
-                    getIpApiJson(h);
+                    let h;
+                    if ($('#use-current-connection-checkbox').checked) {
+                        h = "none";
+                    } else {
+                        h = $('#hostname-or-ip-textbox').val();
+                    }
+                    getIpJsonFromIpApi(h);
                 }
             };
 
-            let getIpApiJson = function (ipOrHostname) {
+            let getIpJsonFromIpApi = function (ipOrHostname) {
                 let h = "http://ip-api.com/json/" + String(ipOrHostname);
                 $.ajax(h, {
                     dataType: 'json',
@@ -286,6 +291,19 @@
                         $('#option-enter-ip').parent().removeClass('btn-primary');
                         slideUpDownOrdered('card-map-by-ip', 'card-map-by-lat-long');
                     }
+                }
+            });
+
+            $('#use-current-connection-checkbox').on('change', function () {
+                if (this.checked) {
+                    $('#hostname-or-ip-textbox').val("");
+                    $('#hostname-or-ip-textbox').attr("disabled", "disabled");
+                    $('#hostname-or-ip-textbox').addClass("disabled");
+                    $('#btn-generate-by-ip').removeClass("disabled");
+                } else {
+                    $('#hostname-or-ip-textbox').removeAttr("disabled");
+                    $('#hostname-or-ip-textbox').removeClass("disabled");
+                    $('#btn-generate-by-ip').addClass("disabled");
                 }
             });
 
