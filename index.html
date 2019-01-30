@@ -11,8 +11,8 @@
     <title>ipMapper</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" integrity="sha384-ZavCY/mrwfrTwoTzagp0wAGJB2MmGRcgD/hDlx/e56dfZojuydghe0E3/Bk1VKu9" 
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css"
+        integrity="sha384-ZavCY/mrwfrTwoTzagp0wAGJB2MmGRcgD/hDlx/e56dfZojuydghe0E3/Bk1VKu9" crossorigin="anonymous">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -60,18 +60,20 @@
                     <div class="card-header">
                         <h5 class="m-b-0">Enter Latitude and Longitude</h5>
                     </div>
-                    <div class="col-md-8 mx-auto">
-                        <div class="row m-t-10">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="search-latitude"><b>Latitude</b></label>
-                                    <input type="text" class="form-control" id="search-latitude" placeholder="Latitude">
+                    <div class="card-body">
+                        <div class="col-md-8 mx-auto">
+                            <div class="row m-t-10">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="search-latitude"><b>Latitude</b></label>
+                                        <input type="text" class="form-control" id="search-latitude" placeholder="Latitude">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="search-longitude"><b>Longitude</b></label>
-                                    <input type="text" class="form-control" id="search-longitude" placeholder="Longitude">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="search-longitude"><b>Longitude</b></label>
+                                        <input type="text" class="form-control" id="search-longitude" placeholder="Longitude">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,15 +85,17 @@
                     <div class="card-header">
                         <h5 class="m-b-0" style="float:left;">Select IP API Provider</h5>
                         <div style="float:right;">
-                        <span class="badge badge-danger">key</span><small> means API key is required</small>
+                            <span class="badge badge-danger">key</span><small> means API key is required</small>
                         </div>
                     </div>
-                    <div class="row m-t-10">
-                        <div class="form-group mx-auto">
-                            <select class="selectpicker" id="select-ip-api-provider">
-                                <option>http://ip-api.com</option>
-                                <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>">http://ipstack.com</option>
-                            </select>
+                    <div class="card-body">
+                        <div class="row m-t-10">
+                            <div class="form-group mx-auto">
+                                <select class="selectpicker" id="select-ip-api-provider">
+                                    <option>http://ip-api.com</option>
+                                    <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>">http://ipstack.com</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +112,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js" integrity="sha384-xuUB7RiCht6gdWrTGeTHiVRhtXiryS5fNys9jjr4bhj4S0mmw4jICW287qdx15RV" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js" integrity="sha384-xuUB7RiCht6gdWrTGeTHiVRhtXiryS5fNys9jjr4bhj4S0mmw4jICW287qdx15RV"
         crossorigin="anonymous"></script>
 
     <script>
