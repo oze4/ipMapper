@@ -1,5 +1,5 @@
-# [ipMapper](http://ipmapper.ostrike.com/)
+# [ipMapper](https://ipmapper.ostrike.com/)
 
-<h4>!in progress!</h4>
+<h4>!~~ In Progress ~~!</h4>
 
-<h4>testing with leaflet.js</h4>
+<small>testing with leaflet.js</small>
