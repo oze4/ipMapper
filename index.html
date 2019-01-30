@@ -25,7 +25,9 @@
     <!----------------------------------------------------------------->
     <header class="topbar">
         <span>
-            <img style="width: 160px; height: 40px;" alt="homepage" src="../docs/leaflet_logo_full.png">
+            <a href="https://github.com/oze4" rel="noopener noreferrer" target="_blank">
+                <img style="width: 56px; height: 52px;" alt="homepage" src="../docs/ostrike_logo.png">
+            </a>
         </span>
     </header>
     <!----------------------------------------------------------------->
@@ -139,7 +141,17 @@
                         <div class="row m-t-10 is-hidden" id="hostname-or-ip-slider">
                             <div class="col-md-6 mx-auto">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="hostname-or-ip-textbox" placeholder="Enter Hostname or IP">
+                                    <div class="row">
+                                        <input type="text" class="form-control" id="hostname-or-ip-textbox" placeholder="Enter Hostname or IP">
+                                    </div>
+                                    <!-- USE CURRENT IP -->
+                                    <div class="row m-t-5">
+                                        <input type="checkbox" class="form-check" id="use-current-connection">
+                                        <label class="m-0" for="use-current-connection">
+                                            <span><small>Use Current IP</small></span>
+                                        </label>
+                                    </div>
+                                    <!-- END USE CURRENT IP -->
                                 </div>
                             </div>
                         </div>
@@ -175,7 +187,7 @@
             </div>
             <!----------------------------------------------------------------->
             <!-- END RESULTS/MAP CARD -->
-            <!----------------------------------------------------------------->            
+            <!----------------------------------------------------------------->
         </div>
         <!-- END CONTENT WRAPPER -->
     </div>
@@ -232,7 +244,7 @@
             let getIpData = function () {
                 let provider = $('#select-ip-api-provider').val();
                 if (provider === "http://ip-api.com") {
-                    getIpApiJson($('#hostname-or-ip-textbox').val());
+                    getIpApiJson(String($('#hostname-or-ip-textbox').val()));
                 }
             };
 
