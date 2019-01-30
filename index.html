@@ -267,8 +267,7 @@
             };
 
             let checkEnableLatLonGenerateMapButton = function () {
-                if ($('#search-latitude').val().length > 0 & $('#search-longitude').val().length >
-                    0) {
+                if ($('#search-latitude').val().length > 0 & $('#search-longitude').val().length > 0) {
                     $('#btn-generate-by-latlon').removeClass('disabled');
                 } else {
                     $('#btn-generate-by-latlon').addClass('disabled');
@@ -278,12 +277,10 @@
             let getIpData = function () {
                 let provider = $('#select-ip-api-provider').val();
                 if (provider === "http://ip-api.com") {
-                    let h;
+                    let h = $('#hostname-or-ip-textbox').val();
                     if ($('#use-current-connection-checkbox').checked) {
                         h = "none";
-                    } else {
-                        h = $('#hostname-or-ip-textbox').val();
-                    }
+                    } 
                     getIpJsonFromIpApi(h);
                 }
             };
