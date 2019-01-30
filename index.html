@@ -141,14 +141,12 @@
                         <div class="row m-t-10 is-hidden" id="hostname-or-ip-slider">
                             <div class="col-md-6 mx-auto">
                                 <div class="form-group">
-                                    <div class="row">
-                                        <input type="text" class="form-control" id="hostname-or-ip-textbox" placeholder="Enter Hostname or IP">
-                                    </div>
+                                    <input type="text" class="form-control" id="hostname-or-ip-textbox" placeholder="Enter Hostname or IP">
                                     <!-- USE CURRENT IP -->
-                                    <div class="row m-t-5">
+                                    <div class="inline-field m-t-0">
                                         <input type="checkbox" class="form-check" id="use-current-connection">
-                                        <label class="m-0" for="use-current-connection">
-                                            <span><small>Use Current IP</small></span>
+                                        <label for="use-current-connection">
+                                            <small> Use Current IP</small>
                                         </label>
                                     </div>
                                     <!-- END USE CURRENT IP -->
@@ -376,8 +374,11 @@
             cursor: not-allowed;
         }
 
-        .fl-l {
-            float: left;
+        .inline-field input,
+        .inline-field label {
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle;
         }
 
         html body .m-0 {
