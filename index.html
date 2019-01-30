@@ -120,7 +120,8 @@
                                 <select class="selectpicker" id="select-ip-api-provider">
                                     <option>-</option>
                                     <option>http://ip-api.com</option>
-                                    <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>" disabled>http://ipstack.com</option>
+                                    <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>"
+                                        disabled>http://ipstack.com</option>
                                 </select>
                             </div>
                         </div>
@@ -262,10 +263,15 @@
 
             $('#option-enter-lat-long').on('click', function () {
                 if (!$(this).parent().hasClass('disabled')) {
-                    clearApiKeyAndHostnameOrIpTextboxes();
-                    $(this).parent().addClass('btn-primary');
-                    $('#option-enter-ip').parent().removeClass('btn-primary');
-                    slideUpDownOrdered('card-map-by-ip', 'card-map-by-lat-long');
+                    if ($(this).parent().hasClass('btn-primary')) {
+                        $('#card-map-by-lat-long').slideUp('slow');
+                        $(this).parent().removeClass('btn-primary');
+                    } else {
+                        clearApiKeyAndHostnameOrIpTextboxes();
+                        $(this).parent().addClass('btn-primary');
+                        $('#option-enter-ip').parent().removeClass('btn-primary');
+                        slideUpDownOrdered('card-map-by-ip', 'card-map-by-lat-long');
+                    }
                 }
             });
 
