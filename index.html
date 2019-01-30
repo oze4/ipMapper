@@ -171,20 +171,51 @@
     <script>
         $(function () {
 
+            let slideUp = function(a,b){
+                $('#'+a).slideUp('slow');
+                $('#'+b).slideUp('slow');
+            };
+
+            let slideUpDownOrdered = function(up,down){
+                $('#'+up).slideUp('slow', function () {
+                    $('#'+down).slideDown('slow');
+                });
+            };
+
+            let slideUpDown = function(up,down){
+                $('#'+up).slideUp('slow');
+                $('#'+down).slideDown('slow');
+            };
+
+            let clearApiKeyAndHostnameOrIpTextboxes = function(){
+                $('#api-key-textbox').val("");
+                $('#hostname-or-ip-textbox').val("");
+            };
+
+            let slideUpApiKeyAndHostnameOrIpTextboxes = function(){
+                slideUp('api-key-slider', 'hostname-or-ip-slider');
+            };
+            
+            let checkEnableLatLonGenerateMapButton = function () {
+                if ($('#search-latitude').val().length > 0 & $('#search-longitude').val().length > 0) {
+                    $('#btn-generate-by-latlon').removeClass('disabled');
+                } else {
+                    $('#btn-generate-by-latlon').addClass('disabled');
+                }
+            };
+
             $('#option-enter-ip').on('click', function () {
+                clearApiKeyAndHostnameOrIpTextboxes();
                 $(this).parent().addClass('btn-primary');
                 $('#option-enter-lat-long').parent().removeClass('btn-primary');
-                $('#card-map-by-lat-long').slideUp('slow', function () {
-                    $('#card-map-by-ip').slideDown('slow');
-                });
+                slideUpDownOrdered('card-map-by-lat-long','card-map-by-ip');
             });
 
             $('#option-enter-lat-long').on('click', function () {
+                clearApiKeyAndHostnameOrIpTextboxes();
                 $(this).parent().addClass('btn-primary');
                 $('#option-enter-ip').parent().removeClass('btn-primary');
-                $('#card-map-by-ip').slideUp('slow', function () {
-                    $('#card-map-by-lat-long').slideDown('slow');
-                });
+                slideUpDownOrdered('card-map-by-ip','card-map-by-lat-long');
             });
 
             $('#api-key-textbox').on('input', function () {
@@ -210,28 +241,16 @@
                 let provider = $(this).val();
                 if (provider != "-") {
                     if (provider === "http://ip-api.com") {
-                        $('#api-key-slider').slideUp('slow');
-                        $('#hostname-or-ip-slider').slideDown('slow');
+                        slideUpDown('api-key-slider','hostname-or-ip-slider');
                     }
                     if (provider === "http://ipstack.com") {
-                        $('#hostname-or-ip-slider').slideUp('slow');
-                        $('#api-key-slider').slideDown('slow');
+                        slideUpDown('hostname-or-ip-slider','api-key-slider');
                     }
                 } else {
-                    $('#api-key-slider').slideUp('slow');
-                    $('#hostname-or-ip-slider').slideUp('slow');
+                    slideUpApiKeyAndHostnameOrIpTextboxes();
                 }
-                $('#api-key-textbox').val("");
-                $('#hostname-or-ip-textbox').val("");
-            });
-
-            let checkEnableLatLonGenerateMapButton = function () {
-                if ($('#search-latitude').val().length > 0 & $('#search-longitude').val().length > 0) {
-                    $('#btn-generate-by-latlon').removeClass('disabled');
-                } else {
-                    $('#btn-generate-by-latlon').addClass('disabled');
-                }
-            };
+                clearApiKeyAndHostnameOrIpTextboxes();
+            });            
 
             $('#search-latitude').on('input', function () {
                 checkEnableLatLonGenerateMapButton();
