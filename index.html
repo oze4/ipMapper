@@ -35,7 +35,11 @@
     <!-- PAGE WRAPPER -->
     <!----------------------------------------------------------------->
     <div class="page-wrapper">
+        <!-- CONTENT WRAPPER -->
         <div class="container-fluid content-wrapper m-t-60">
+            <!----------------------------------------------------------------->
+            <!-- SELECT MAIN OPTION -->
+            <!----------------------------------------------------------------->
             <div class="col-md-8 mx-auto">
                 <div class="card">
                     <div class="card-header text-center select-option-header">
@@ -55,6 +59,12 @@
                     </div>
                 </div>
             </div>
+            <!----------------------------------------------------------------->
+            <!-- END SELECT MAIN OPTION -->
+            <!----------------------------------------------------------------->
+            <!----------------------------------------------------------------->
+            <!-- ENTER LAT/LON CARD -->
+            <!----------------------------------------------------------------->
             <div class="col-md-8 mx-auto is-hidden" id="card-map-by-lat-long">
                 <div class="card m-t-20">
                     <div class="card-header">
@@ -63,18 +73,22 @@
                     <div class="card-body">
                         <div class="col-md-8 mx-auto">
                             <div class="row m-t-10">
+                                <!-- LAT -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="search-latitude"><b>Latitude</b></label>
                                         <input type="text" class="form-control" id="search-latitude" placeholder="Latitude">
                                     </div>
                                 </div>
+                                <!-- END LAT -->
+                                <!-- LON -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="search-longitude"><b>Longitude</b></label>
                                         <input type="text" class="form-control" id="search-longitude" placeholder="Longitude">
                                     </div>
                                 </div>
+                                <!-- END LON -->
                             </div>
                         </div>
                     </div>
@@ -83,6 +97,12 @@
                     </div>
                 </div>
             </div>
+            <!----------------------------------------------------------------->
+            <!-- END ENTER LAT/LON CARD -->
+            <!----------------------------------------------------------------->
+            <!----------------------------------------------------------------->
+            <!-- SELECT IP API PROVIDER CARD -->
+            <!----------------------------------------------------------------->
             <div class="col-md-8 mx-auto is-hidden" id="card-map-by-ip">
                 <div class="card m-t-20">
                     <div class="card-header">
@@ -94,6 +114,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <!-- SELECT PROVIDER -->
                         <div class="row m-t-10">
                             <div class="form-group mx-auto" style="border: 1px solid black;">
                                 <select class="selectpicker" id="select-ip-api-provider">
@@ -103,6 +124,8 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- END SELECT PROVIDER -->
+                        <!-- ENTER API KEY -->
                         <div class="row m-t-10 is-hidden" id="api-key-slider">
                             <div class="col-md-6 mx-auto">
                                 <div class="form-group">
@@ -110,6 +133,8 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- END ENTER API KEY -->
+                        <!-- ENTER HOSTNAME OR IP ADDRESS -->
                         <div class="row m-t-10 is-hidden" id="hostname-or-ip-slider">
                             <div class="col-md-6 mx-auto">
                                 <div class="form-group">
@@ -117,13 +142,18 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- END ENTER HOSTNAME OR IP ADDRESS -->
                     </div>
                     <div class="card-footer text-center">
                         <button class="btn btn-primary disabled" id="btn-generate-by-ip">Generate Map</button>
                     </div>
                 </div>
             </div>
+            <!----------------------------------------------------------------->
+            <!-- END SELECT IP API PROVIDER CARD -->
+            <!----------------------------------------------------------------->
         </div>
+        <!-- END CONTENT WRAPPER -->
     </div>
     <!----------------------------------------------------------------->
     <!-- END PAGE WRAPPER -->
@@ -161,7 +191,9 @@
                 if ($(this).val().length > 5) {
                     $('#hostname-or-ip-slider').slideDown('slow');
                 } else {
+                    $('#hostname-or-ip-textbox').val("");
                     $('#hostname-or-ip-slider').slideUp('slow');
+                    $('#btn-generate-by-ip').addClass('disabled');
                 }
             });
 
@@ -174,6 +206,7 @@
             });
 
             $('#select-ip-api-provider').on('change', function () {
+                $('#btn-generate-by-ip').addClass('disabled');
                 let provider = $(this).val();
                 if (provider != "-") {
                     if (provider === "http://ip-api.com") {
