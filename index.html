@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Best App Ever. Duh.">
+    <meta name="author" content="Matt Oestreich">
     <link rel="icon" type="image/png" sizes="16x16" href="../docs/favicon.png">
     <title>ipMapper</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -279,11 +279,7 @@
             let getIpJsonFromIpApi = function (ipOrHostname) {
                 let h = "http://ip-api.com/json/" + String(ipOrHostname);
                 $.ajax(h, {
-                    type: "GET",
-                    dataType: 'json',
-                    headers: {
-                        "x-requested-with": "xhr"
-                    },
+                    dataType: "json",
                     success: function (result) {
                         $('#results-map-card').slideDown();
                         $('#json-results').html(JSON.stringify(result, undefined, 2))
