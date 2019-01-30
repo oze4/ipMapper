@@ -279,8 +279,10 @@
             let getIpJsonFromIpApi = function (ipOrHostname) {
                 let h = "http://ip-api.com/json/" + String(ipOrHostname);
                 $.ajax(h, {
-                    crossDomain: true,
-                    dataType: 'jsonp',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    dataType: 'json',
                     success: function (result) {
                         $('#results-map-card').slideDown();
                         $('#json-results').html(JSON.stringify(result, undefined, 2))
