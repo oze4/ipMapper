@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Geo map public IP addresses">
     <meta name="author" content="Matt Oestreich">
+    <meta name="og:image" content="../docs/ostrike_logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../docs/favicon.png">
     <title>ipMapper</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -286,13 +287,7 @@
                         let r = JSON.stringify(result, undefined, 2);
                         $('#json-results').html(r);
                         let jsonResult = JSON.parse(r);
-                        let lng = jsonResult.lon;
-                        let lat = jsonResult.lat;
-                        let map = L.map('map-results').setView([lat, lng], 13);
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        }).addTo(map);
-                        L.marker([lat, lng]).addTo(map);
+                        mapLatLong(jsonResult.lat, jsonResult.lon, 'map-display');
                         scrollTo('results-map-card');
                     },
                     error: function () {
@@ -301,10 +296,20 @@
                 });
             };
 
+            let mapLatLong = function(lat,long,displayElement){
+                let tl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                let attrib = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+                let map = L.map(displayElement).setView([lat, long], 13);
+                L.tileLayer(tl, { attribution: attrib }).addTo(map);
+                L.marker([lat, long]).addTo(map);
+            }
+
             $('#option-enter-ip').on('click', function () {
                 if (!$(this).parent().hasClass('disabled')) {
                     if ($(this).parent().hasClass('btn-primary')) {
-                        $('#card-map-by-ip').slideUp('slow');
+                        $('#results-map-card').slideUp('slow', function(){
+                            $('#card-map-by-ip').slideUp('slow');
+                        });
                         $(this).parent().removeClass('btn-primary');
                     } else {
                         clearApiKeyAndHostnameOrIpTextboxes();
@@ -385,21 +390,23 @@
             });
 
             $('#btn-generate-by-ip').on('click', function () {
-                $('#results-map-card').html("").append(`<div class='card m-t-20'>
+                $('#results-map-card').html("").append(`
+                <div class='card m-t-20'>
                     <div class='card-header'>
                         <h5 class='m-b-0'>Results</h5>
                     </div>
                     <div class='card-body'>
                         <div class='row'>
-                            <div class='col-md-4'>
+                            <div class='col-md-4 results-json'>
                                 <pre id='json-results'></pre>
                             </div>
-                            <div class='col-md-8'>
-                                <div id='map-results' style='height:400px;'></div>
+                            <div class='col-md-8 results-map'>
+                                <div id='map-display'></div>
                             </div>
                         </div>
                     </div>
-                </div>`);
+                </div>
+                `);
                 getIpData();
             });
         })
@@ -441,6 +448,26 @@
 
         .is-hidden {
             display: none;
+        }
+
+        .results-json {
+            text-align: center;
+            overflow-x: auto;
+            border: 1px solid black;
+        }
+
+        .results-map {
+            border: 1px solid black;
+        }
+
+        .results-map>#map-display {
+            height: 400px;
+        }
+
+        .results-json>pre {
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
         }
 
         .disabled {
