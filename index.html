@@ -227,30 +227,28 @@
             }
 
             let slideUp = function (a, b) {
-                $('#' + a).slideUp('slow');
-                $('#' + b).slideUp('slow');
+                $('#'+a).slideUp('slow');
+                $('#'+b).slideUp('slow');
             };
 
             let slideUpDownOrdered = function (up, down) {
-                $('#' + up).slideUp('slow', function () {
-                    $('#' + down).slideDown('slow', function(){
+                $('#'+up).slideUp('slow', function () {
+                    $('#'+down).slideDown('slow', function(){
                         scrollTo(down);
                     });
                 });                
             };
 
             let slideUpDown = function (up, down) {
-                $('#' + up).slideUp('slow');
-                $('#' + down).slideDown('slow');
+                $('#'+up).slideUp('slow');
+                $('#'+down).slideDown('slow', function(){
+                    scrollTo(down);
+                });
             };
 
             let clearApiKeyAndHostnameOrIpTextboxes = function () {
                 $('#api-key-textbox').val("");
                 $('#hostname-or-ip-textbox').val("");
-            };
-
-            let slideUpApiKeyAndHostnameOrIpTextboxes = function () {
-                slideUp('api-key-slider', 'hostname-or-ip-slider');
             };
 
             let checkEnableLatLonGenerateMapButton = function () {
@@ -275,7 +273,7 @@
                     if ($('#use-current-connection-checkbox').checked) {
                         h = "none";
                     } 
-                    getIpJsonFromIpApi(h);
+                    getIpJsonFromIpApi(h);                    
                 }
             };
 
@@ -295,6 +293,7 @@
                             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         }).addTo(map);
                         L.marker([lat, lng]).addTo(map);
+                        scrollTo('results-map-card');
                     },
                     error: function () {
                         alert("Error! Can't query " + h);
@@ -372,7 +371,7 @@
                         slideUpDown('hostname-or-ip-slider', 'api-key-slider');
                     }
                 } else {
-                    slideUpApiKeyAndHostnameOrIpTextboxes();
+                    slideUp('api-key-slider', 'hostname-or-ip-slider');
                 }
                 clearApiKeyAndHostnameOrIpTextboxes();
             });
