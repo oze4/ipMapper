@@ -224,15 +224,16 @@
 
             if (location.protocol === "https:") {
                 let toast = `
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Well done!</h4>
-                    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">HTTPS Detected</h4>
+                    <p>In order to prevent 'Mixed Content' errors with our API providers, please use this site with HTTP!
+                    Otherwise, you will need to provide API keys to all providers</p>
                     <hr>
-                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                    <p class="mb-0">Otherwise, you will need to provide API keys to all providers</p>
                 </div>
                 `
                 $('.btn-option').addClass("disabled").attr("disabled", "disabled");
-                $('.page-wrapper').append(toast);
+                $('.page-wrapper').html(toast);
             }
 
             let slideUp = function (a, b) {
