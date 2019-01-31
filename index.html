@@ -26,7 +26,7 @@
     <!----------------------------------------------------------------->
     <!-- TOPBAR HEADER -->
     <!----------------------------------------------------------------->
-    <header class="topbar">
+    <header class="topbar" id="topbar">
         <span>
             <a href="https://github.com/oze4" rel="noopener noreferrer" target="_blank">
                 <img style="width: 56px; height: 52px;" alt="homepage" src="../docs/ostrike_logo.png">
@@ -235,7 +235,7 @@
             let slideUpDownOrdered = function (up, down) {
                 $('#'+up).slideUp('slow', function () {
                     $('#'+down).slideDown('slow', function(){
-                        scrollTo(down);
+                        scrollTo('#'+down);
                     });
                 });                
             };
@@ -243,7 +243,7 @@
             let slideUpDown = function (up, down) {
                 $('#'+up).slideUp('slow');
                 $('#'+down).slideDown('slow', function(){
-                    scrollTo(down);
+                    scrollTo('#'+down);
                 });
             };
 
@@ -260,8 +260,8 @@
                 }
             };
 
-            let scrollTo = function(id){
-                let p = $('#'+id).offset().top;
+            let scrollTo = function(e){
+                let p = $(e).offset().top;
                 $("body, html").animate({
                     scrollTop: p
                 } /* speed */ );
@@ -288,7 +288,7 @@
                         $('#json-results').html(r);
                         let jsonResult = JSON.parse(r);
                         mapLatLong(jsonResult.lat, jsonResult.lon, 'map-display');
-                        scrollTo('results-map-card');
+                        scrollTo('#results-map-card');
                     },
                     error: function () {
                         alert("Error! Can't query " + h);
@@ -308,7 +308,9 @@
                 if (!$(this).parent().hasClass('disabled')) {
                     if ($(this).parent().hasClass('btn-primary')) {
                         $('#results-map-card').slideUp('slow', function(){
-                            $('#card-map-by-ip').slideUp('slow');
+                            $('#card-map-by-ip').slideUp('slow', function(){
+                                scrollTo('#topbar');
+                            });
                         });
                         $(this).parent().removeClass('btn-primary');
                     } else {
