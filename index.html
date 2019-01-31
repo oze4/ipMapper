@@ -223,18 +223,7 @@
         $(function () {
 
             if (location.protocol === "https:") {
-                let h = location.hostname;
-                location.replace("http://"+h);
-                /*let toast = `
-                <div class="alert alert-danger m-t-60" role="alert">
-                    <h4 class="alert-heading">HTTPS Detected</h4>
-                    <p>In order to prevent 'Mixed Content' errors with our API providers, please use this site with HTTP!
-                    Otherwise, you will need to provide API keys to all providers</p>
-                </div>
-                `
-                $('.btn-option').addClass("disabled").attr("disabled", "disabled");
-                $('.page-wrapper').html(toast);*/
-
+                location.replace("http://"+location.hostname);
             }
 
             let slideUp = function (a, b) {
