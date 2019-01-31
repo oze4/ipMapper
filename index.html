@@ -272,11 +272,11 @@
                 if (provider === "http://ip-api.com") {
                     let h = $('#hostname-or-ip-textbox').val();
                     if ($('#use-current-connection-checkbox').prop("checked")) {
-                        h = "none";
+                        h = "";
                     } 
                     getIpJsonFromIpApi(h);                    
                 }
-
+                /**/
                 /* IP STACK */
                 if (provider === "http://ipstack.com") {
                     let a = $('#api-key-textbox').val();
@@ -286,10 +286,12 @@
                     } 
                     getIpJsonFromIpStack(h, a);
                 }
+                /**/
             };
 
             let getIpJsonFromIpApi = function (ipOrHostname) {
                 let h = "http://ip-api.com/json/" + String(ipOrHostname);
+                alert(h);
                 $.ajax(h, {
                     dataType: "json",
                     success: function (result) {
