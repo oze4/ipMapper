@@ -195,21 +195,6 @@
             <!-- RESULTS/MAP CARD -->
             <!----------------------------------------------------------------->
             <div class="col-md-12 mx-auto is-hidden" id="results-map-card">
-                <div class="card m-t-20">
-                    <div class="card-header">
-                        <h5 class="m-b-0">Results</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <pre id="json-results"></pre>
-                            </div>
-                            <div class="col-md-8">
-                                <div id="map-results" style="width:900px; height:400px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!----------------------------------------------------------------->
             <!-- END RESULTS/MAP CARD -->
@@ -238,7 +223,16 @@
         $(function () {
 
             if (location.protocol === "https:") {
-                location.protocol = "http:";
+                let toast = `
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Well done!</h4>
+                    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                    <hr>
+                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                </div>
+                `
+                $('.btn-option').addClass("disabled").attr("disabled", "disabled");
+                $('.page-wrapper').append(toast);
             }
 
             let slideUp = function (a, b) {
@@ -248,8 +242,10 @@
 
             let slideUpDownOrdered = function (up, down) {
                 $('#' + up).slideUp('slow', function () {
-                    $('#' + down).slideDown('slow');
-                });
+                    $('#' + down).slideDown('slow', function(){
+                        scrollTo(down);
+                    });
+                });                
             };
 
             let slideUpDown = function (up, down) {
@@ -274,6 +270,13 @@
                 }
             };
 
+            let scrollTo = function(id){
+                let p = $('#'+id).offset().top;
+                $("body, html").animate({
+                    scrollTop: p
+                } /* speed */ );
+            };
+
             let getIpData = function () {
                 let provider = $('#select-ip-api-provider').val();
                 if (provider === "http://ip-api.com") {
@@ -291,11 +294,12 @@
                     dataType: "json",
                     success: function (result) {
                         $('#results-map-card').slideDown();
-                        $('#json-results').html(JSON.stringify(result, undefined, 2))
-                        var jsonResult = JSON.parse(JSON.stringify(result));
+                        let r = JSON.stringify(result, undefined, 2);
+                        $('#json-results').html(r);
+                        let jsonResult = JSON.parse(r);
                         let lng = jsonResult.lon;
                         let lat = jsonResult.lat;
-                        var map = L.map('map-results').setView([lat, lng], 13);
+                        let map = L.map('map-results').setView([lat, lng], 13);
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         }).addTo(map);
@@ -391,13 +395,33 @@
             });
 
             $('#btn-generate-by-ip').on('click', function () {
+                $('#results-map-card').html("").append(`<div class='card m-t-20'>
+                    <div class='card-header'>
+                        <h5 class='m-b-0'>Results</h5>
+                    </div>
+                    <div class='card-body'>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                <pre id='json-results'></pre>
+                            </div>
+                            <div class='col-md-8'>
+                                <div id='map-results' style='height:400px;'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
                 getIpData();
             });
-
         })
     </script>
 
-    <style>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
         .page-wrapper {
             height: 100vh;
         }
