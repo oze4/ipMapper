@@ -137,8 +137,7 @@
                                 <select class="selectpicker" id="select-ip-api-provider">
                                     <option>-</option>
                                     <option>http://ip-api.com</option>
-                                    <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>"
-                                        disabled>http://ipstack.com</option>
+                                    <option data-content="http://ipstack.com <span class='badge badge-danger'>key</span>">http://ipstack.com</option>
                                 </select>
                             </div>
                         </div>
@@ -269,12 +268,23 @@
 
             let getIpData = function () {
                 let provider = $('#select-ip-api-provider').val();
+                /* IP API */
                 if (provider === "http://ip-api.com") {
                     let h = $('#hostname-or-ip-textbox').val();
-                    if ($('#use-current-connection-checkbox').checked) {
+                    if ($('#use-current-connection-checkbox').prop("checked")) {
                         h = "none";
                     } 
                     getIpJsonFromIpApi(h);                    
+                }
+
+                /* IP STACK */
+                if (provider === "http://ipstack.com") {
+                    let a = $('#api-key-textbox').val();
+                    let h = $('#hostname-or-ip-textbox').val();                    
+                    if ($('#use-current-connection-checkbox').prop("checked")) {
+                        h = "check";
+                    } 
+                    getIpJsonFromIpStack(h, a);
                 }
             };
 
@@ -286,6 +296,7 @@
                         $('#results-map-card').slideDown();
                         let r = JSON.stringify(result, undefined, 2);
                         $('#json-results').html(r);
+                        $('#map-display').height($('#results-json-div').height());
                         let jsonResult = JSON.parse(r);
                         mapLatLong(jsonResult.lat, jsonResult.lon, 'map-display');
                         scrollTo('#results-map-card');
@@ -295,6 +306,25 @@
                     }
                 });
             };
+
+            let getIpJsonFromIpStack = function(ipOrHostname, apiKey){
+                let h = "http://api.ipstack.com/"+String(ipOrHostname)+"?access_key="+String(apiKey);
+                $.ajax(h, {
+                    dataType: "json",
+                    success: function (result) {
+                        $('#results-map-card').slideDown();
+                        let r = JSON.stringify(result, undefined, 2);
+                        $('#json-results').html(r);
+                        $('#map-display').height($('#results-json-div').height());
+                        let jsonResult = JSON.parse(r);
+                        mapLatLong(jsonResult.latitude, jsonResult.longitude, 'map-display');
+                        scrollTo('#results-map-card');
+                    },
+                    error: function () {
+                        alert("Error! Can't query " + h);
+                    }
+                });
+            }
 
             let mapLatLong = function(lat,long,displayElement){
                 let tl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -359,6 +389,11 @@
                 }
             });
 
+            $(document).on('click', '#btn-clear-results', function(){
+                $('#results-map-card').html("");
+                scrollTo('#topbar');
+            });
+
             $('#hostname-or-ip-textbox').on('input', function () {
                 if ($(this).val().length > 3) {
                     $('#btn-generate-by-ip').removeClass('disabled');
@@ -399,13 +434,16 @@
                     </div>
                     <div class='card-body'>
                         <div class='row'>
-                            <div class='col-md-4 results-json'>
+                            <div class='col-md-4 results-json' id='results-json-div'>
                                 <pre id='json-results'></pre>
                             </div>
                             <div class='col-md-8 results-map'>
                                 <div id='map-display'></div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-danger" id="btn-clear-results">Clear Results</button>
                     </div>
                 </div>
                 `);
