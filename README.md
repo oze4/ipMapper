@@ -1,5 +1,3 @@
 # [ipMapper](http://ipmapper.ostrike.com/)
 
-<h4>!~~ In Progress ~~!</h4>
-
-<small>testing with leaflet.js</small>
+# Map Public IP Addresses
