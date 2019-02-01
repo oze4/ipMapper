@@ -4,7 +4,7 @@
 Use with hostname or IP address
 
 ### **Hostname**
-![hostname](/docs/hostname.png)
+![hostname](/docs/images/hostname.png)
 
 ### **IP Address**
-![ip_address](/docs/ip_address.png)
+![ip_address](/docs/images/ip_address.png)
