@@ -14,8 +14,10 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css"
         integrity="sha384-ZavCY/mrwfrTwoTzagp0wAGJB2MmGRcgD/hDlx/e56dfZojuydghe0E3/Bk1VKu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha384-G/A+0aOOLD5kUMKNxuvWw0dl71P23X8Ag5YpNKKxINQPf2uM42AomzFEyURI5mPk" 
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-        crossorigin="" />
+        crossorigin="">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -45,85 +47,14 @@
         <!----------------------------------------------------------------->
         <div class="container-fluid content-wrapper m-t-60">
             <!----------------------------------------------------------------->
-            <!-- SELECT MAIN OPTION -->
-            <!----------------------------------------------------------------->
-            <div class="col-md-8 mx-auto">
-                <div class="card">
-                    <div class="card-header text-center select-option-header">
-                        <h4 class="m-t-10 m-b-10">Please select an option:</h4>
-                    </div>
-                    <div class="card-body mx-auto">
-                        <div class="container-fluid">
-                            <div class="btn-group btn-group-toggle">
-                                <label class="btn btn-option">
-                                    <input type="radio" name="options" id="option-enter-ip"> Map by IP
-                                </label>
-                                <label class="btn btn-option disabled">
-                                    <input type="radio" name="options" id="option-enter-lat-long"> Map by Lat/Long
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!----------------------------------------------------------------->
-            <!-- END SELECT MAIN OPTION -->
-            <!----------------------------------------------------------------->
-            <!----------------------------------------------------------------->
-            <!-- ENTER LAT/LON CARD -->
-            <!----------------------------------------------------------------->
-            <div class="col-md-8 mx-auto is-hidden" id="card-map-by-lat-long">
-                <div class="card m-t-20">
-                    <div class="card-header">
-                        <h5 class="m-b-0">Enter Latitude and Longitude</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-md-8 mx-auto">
-                            <div class="row m-t-10">
-                                <!----------------------------------------------------------------->
-                                <!-- LAT -->
-                                <!----------------------------------------------------------------->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="search-latitude"><b>Latitude</b></label>
-                                        <input type="text" class="form-control" id="search-latitude" placeholder="Latitude">
-                                    </div>
-                                </div>
-                                <!----------------------------------------------------------------->
-                                <!-- END LAT -->
-                                <!----------------------------------------------------------------->
-                                <!----------------------------------------------------------------->
-                                <!-- LON -->
-                                <!----------------------------------------------------------------->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="search-longitude"><b>Longitude</b></label>
-                                        <input type="text" class="form-control" id="search-longitude" placeholder="Longitude">
-                                    </div>
-                                </div>
-                                <!----------------------------------------------------------------->
-                                <!-- END LON -->
-                                <!----------------------------------------------------------------->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <button class="btn btn-primary disabled" id="btn-generate-by-latlon">Generate Map</button>
-                    </div>
-                </div>
-            </div>
-            <!----------------------------------------------------------------->
-            <!-- END ENTER LAT/LON CARD -->
-            <!----------------------------------------------------------------->
-            <!----------------------------------------------------------------->
             <!-- SELECT IP API PROVIDER CARD -->
             <!----------------------------------------------------------------->
-            <div class="col-md-8 mx-auto is-hidden" id="card-map-by-ip">
+            <div class="col-md-8 mx-auto" id="card-map-by-ip">
                 <div class="card m-t-20">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         <h5 class="m-b-0">Select IP API Provider</h5>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 mx-auto m-t-10">
                                 <span class="badge badge-danger">key</span><small> means API key is required</small>
                             </div>
                         </div>
@@ -212,6 +143,8 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.js" integrity="sha384-YupqycgoivoabLgPtAkoBYgi9YA09s9HpK4y9xenANc9/mHUuJDoCtvcOQ5/qvMf" 
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js" integrity="sha384-xuUB7RiCht6gdWrTGeTHiVRhtXiryS5fNys9jjr4bhj4S0mmw4jICW287qdx15RV"
@@ -226,57 +159,110 @@
                 location.replace("http://"+location.hostname);
             }
 
-            let slideUp = function (a, b) {
-                $('#'+a).slideUp('slow');
-                $('#'+b).slideUp('slow');
+            let slideControlUp = function (id) {
+                if (Array.isArray(id)) { 
+                    for (let i = 0; i < id.length; i++){
+                        $(String(id[i])).slideUp('slow');
+                    }
+                } else {
+                    $(id).slideUp('slow');
+                }
             };
 
+            let slideControlDown = function(id){
+                if (Array.isArray(id)) { 
+                    for (let i = 0; i < id.length; i++){
+                        $(String(id[i])).slideDown('slow');
+                    }
+                } else {
+                    $(id).slideDown('slow');
+                }
+            }
+
             let slideUpDownOrdered = function (up, down) {
-                $('#'+up).slideUp('slow', function () {
-                    $('#'+down).slideDown('slow', function(){
-                        scrollTo('#'+down);
+                $(up).slideUp('slow', function () {
+                    $(down).slideDown('slow', function(){
+                        scrollTo(down);
                     });
                 });                
             };
 
             let slideUpDown = function (up, down) {
-                $('#'+up).slideUp('slow');
-                $('#'+down).slideDown('slow', function(){
-                    scrollTo('#'+down);
+                $(up).slideUp('slow');
+                $(down).slideDown('slow', function(){
+                    scrollTo(down);
                 });
             };
 
-            let clearApiKeyAndHostnameOrIpTextboxes = function () {
-                $('#api-key-textbox').val("");
-                $('#hostname-or-ip-textbox').val("");
-            };
-
-            let checkEnableLatLonGenerateMapButton = function () {
-                if ($('#search-latitude').val().length > 0 & $('#search-longitude').val().length > 0) {
-                    $('#btn-generate-by-latlon').removeClass('disabled');
+            let clearVal = function(id){
+                if (Array.isArray(id)) { 
+                    for(let i = 0; i < id.length; i++){
+                        $(String(id[i])).val("");
+                    }
                 } else {
-                    $('#btn-generate-by-latlon').addClass('disabled');
+                    $(id).val("");
                 }
-            };
+            }
+
+            let clearHtml = function (id) {
+                if (Array.isArray(id)) { 
+                    for (let i = 0; i < idArray.length; i++) {
+                        $(String(id[i])).html("");
+                    }
+                } else {
+                    $(id).html("");
+                }
+            }
+
+            let disableControl = function(id){
+                if (Array.isArray(id)){
+                    for(let i = 0; i < id.length; i++){;
+                        console.log(id);
+                        $(String(id[i])).addClass('disabled');
+                        $(String(id[i])).attr('disabled', 'disabled');
+                    }
+                } else {
+                    $(id).addClass('disabled');
+                    $(id).attr('disabled', 'disabled');
+                }
+            }
+
+            let enableControl = function(id){
+                if (Array.isArray()){
+                    for(let i = 0; i < id.length; i++){
+                        $(String(id[i])).removeClass('disabled');
+                        $(String(id[i])).removeAttr('disabled');
+                    }
+                } else {
+                    $(id).removeClass('disabled');
+                    $(id).removeAttr('disabled');
+                }
+            }
+
+            let setCheckbox = function (id, isChecked) {
+                $(id).prop('checked', isChecked);
+            }
 
             let scrollTo = function(e){
                 let p = $(e).offset().top;
                 $("body, html").animate({
                     scrollTop: p
-                } /* speed */ );
+                });
             };
 
             let getIpData = function () {
+
                 let provider = $('#select-ip-api-provider').val();
+
                 /* IP API */
                 if (provider === "http://ip-api.com") {
-                    let h = $('#hostname-or-ip-textbox').val();
-                    if ($('#use-current-connection-checkbox').prop("checked")) {
-                        h = "";
+                    let h = "";
+                    if (!$('#use-current-connection-checkbox').prop("checked")) {
+                        h = $('#hostname-or-ip-textbox').val();
                     } 
                     getIpJsonFromIpApi(h);                    
-                }
-                /**/
+                } /**/
+
                 /* IP STACK */
                 if (provider === "http://ipstack.com") {
                     let a = $('#api-key-textbox').val();
@@ -285,8 +271,8 @@
                         h = "check";
                     } 
                     getIpJsonFromIpStack(h, a);
-                }
-                /**/
+                } /**/
+
             };
 
             let getIpJsonFromIpApi = function (ipOrHostname) {
@@ -294,7 +280,7 @@
                 $.ajax(h, {
                     dataType: "json",
                     success: function (result) {
-                        $('#results-map-card').slideDown();
+                        slideControlDown('#results-map-card');
                         let r = JSON.stringify(result, undefined, 2);
                         $('#json-results').html(r);
                         $('#map-display').height($('#results-json-div').height());
@@ -303,7 +289,7 @@
                         scrollTo('#results-map-card');
                     },
                     error: function () {
-                        alert("Error! Can't query " + h);
+                        showToastApiError(h);
                     }
                 });
             };
@@ -313,7 +299,7 @@
                 $.ajax(h, {
                     dataType: "json",
                     success: function (result) {
-                        $('#results-map-card').slideDown();
+                        slideControlDown('#results-map-card');
                         let r = JSON.stringify(result, undefined, 2);
                         $('#json-results').html(r);
                         $('#map-display').height($('#results-json-div').height());
@@ -322,7 +308,7 @@
                         scrollTo('#results-map-card');
                     },
                     error: function () {
-                        alert("Error! Can't query " + h);
+                        showToastApiError(h);
                     }
                 });
             }
@@ -335,96 +321,76 @@
                 L.marker([lat, long]).addTo(map);
             }
 
-            $('#option-enter-ip').on('click', function () {
-                if (!$(this).parent().hasClass('disabled')) {
-                    if ($(this).parent().hasClass('btn-primary')) {
-                        $('#results-map-card').slideUp('slow', function(){
-                            $('#card-map-by-ip').slideUp('slow', function(){
-                                scrollTo('#topbar');
-                            });
-                        });
-                        $(this).parent().removeClass('btn-primary');
-                    } else {
-                        clearApiKeyAndHostnameOrIpTextboxes();
-                        $(this).parent().addClass('btn-primary');
-                        $('#option-enter-lat-long').parent().removeClass('btn-primary');
-                        slideUpDownOrdered('card-map-by-lat-long', 'card-map-by-ip');
-                    }
-                }
-            });
-
-            $('#option-enter-lat-long').on('click', function () {
-                if (!$(this).parent().hasClass('disabled')) {
-                    if ($(this).parent().hasClass('btn-primary')) {
-                        $('#card-map-by-lat-long').slideUp('slow');
-                        $(this).parent().removeClass('btn-primary');
-                    } else {
-                        clearApiKeyAndHostnameOrIpTextboxes();
-                        $(this).parent().addClass('btn-primary');
-                        $('#option-enter-ip').parent().removeClass('btn-primary');
-                        slideUpDownOrdered('card-map-by-ip', 'card-map-by-lat-long');
-                    }
-                }
-            });
+            let showToastApiError = function (host) {
+                $.toast({
+                    heading: 'Error!',
+                    text: "Unable to query "+host+"!",
+                    icon: 'error',
+                    hideAfter: 10000,
+                    showHideTransition: 'slide',
+                    position: 'top-center'
+                });
+                $.toast({
+                    text: "If you are using adblock, it may be blocking our requests. Pause ADBLOCK for this site and try again.",
+                    icon: 'error',
+                    hideAfter: 10000,
+                    showHideTransition: 'slide',
+                    position: 'top-center'
+                });
+            }
 
             $('#use-current-connection-checkbox').on('change', function () {
                 if (this.checked) {
-                    $('#hostname-or-ip-textbox').val("");
-                    $('#hostname-or-ip-textbox').attr("disabled", "disabled");
-                    $('#hostname-or-ip-textbox').addClass("disabled");
-                    $('#btn-generate-by-ip').removeClass("disabled");
+                    clearVal('#hostname-or-ip-textbox');
+                    disableControl('#hostname-or-ip-textbox');
+                    enableControl('#btn-generate-by-ip');
                 } else {
-                    $('#hostname-or-ip-textbox').removeAttr("disabled");
-                    $('#hostname-or-ip-textbox').removeClass("disabled");
-                    $('#btn-generate-by-ip').addClass("disabled");
+                    enableControl('#hostname-or-ip-textbox');
+                    disableControl('#btn-generate-by-ip');
                 }
             });
 
             $('#api-key-textbox').on('input', function () {
                 if ($(this).val().length > 5) {
-                    $('#hostname-or-ip-slider').slideDown('slow');
+                    slideControlDown('#hostname-or-ip-slider');
                 } else {
-                    $('#hostname-or-ip-textbox').val("");
-                    $('#hostname-or-ip-slider').slideUp('slow');
-                    $('#btn-generate-by-ip').addClass('disabled');
+                    clearVal('#hostname-or-ip-textbox');
+                    slideControlUp('#hostname-or-ip-slider');
+                    disableControl('#btn-generate-by-ip');
                 }
             });
 
+            /* #btn-clear-results on click */
             $(document).on('click', '#btn-clear-results', function(){
-                $('#results-map-card').html("");
+                clearHtml('#results-map-card');
                 scrollTo('#topbar');
             });
 
             $('#hostname-or-ip-textbox').on('input', function () {
                 if ($(this).val().length > 3) {
-                    $('#btn-generate-by-ip').removeClass('disabled');
+                    enableControl('#btn-generate-by-ip');
                 } else {
-                    $('#btn-generate-by-ip').addClass('disabled');
+                    disableControl('#btn-generate-by-ip');
                 }
             });
 
             $('#select-ip-api-provider').on('change', function () {
-                $('#btn-generate-by-ip').addClass('disabled');
+                setCheckbox('#use-current-connection-checkbox', false);
+                disableControl('#btn-generate-by-ip');
+                enableControl('#hostname-or-ip-textbox');
+                clearVal(['#api-key-textbox', '#hostname-or-ip-textbox'])
+                clearHtml('#results-map-card');
                 let provider = $(this).val();
                 if (provider != "-") {
                     if (provider === "http://ip-api.com") {
-                        slideUpDown('api-key-slider', 'hostname-or-ip-slider');
+                        slideUpDown('#api-key-slider', '#hostname-or-ip-slider');
                     }
                     if (provider === "http://ipstack.com") {
-                        slideUpDown('hostname-or-ip-slider', 'api-key-slider');
+                        slideUpDown('#hostname-or-ip-slider', '#api-key-slider');
                     }
                 } else {
-                    slideUp('api-key-slider', 'hostname-or-ip-slider');
+                    slideControlUp(['#api-key-slider', '#hostname-or-ip-slider']);
                 }
-                clearApiKeyAndHostnameOrIpTextboxes();
-            });
-
-            $('#search-latitude').on('input', function () {
-                checkEnableLatLonGenerateMapButton();
-            });
-
-            $('#search-longitude').on('input', function () {
-                checkEnableLatLonGenerateMapButton();
             });
 
             $('#btn-generate-by-ip').on('click', function () {
