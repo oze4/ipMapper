@@ -157,7 +157,12 @@
     <script>
         $(function () {
 
-            let showRedirectToast = function () {
+            if (location.protocol === "https:") {
+                Cookies.set('__ipmapperredirected__','true', { expires: 1 });
+                location.replace("http://"+location.hostname);
+            }
+
+            if (Cookies.get('__ipmapperredirected__') === 'true') {
                 $.toast({
                     heading: 'Redirected',
                     text: "Due to API restrictions, you were redirected to 'http'",
@@ -165,14 +170,8 @@
                     hideAfter: 4000,
                     showHideTransition: 'slide'
                 });
+                Cookies.remove('__ipmapperredirected__');
             }
-
-            if (location.protocol === "https:") {
-                Cookies.set('matt','val', { expires: 1 });
-                location.replace("http://"+location.hostname);
-            }
-
-            alert(Cookies.get('matt'));
 
             let slideControlUp = function (id) {
                 if (Array.isArray(id)) { 
