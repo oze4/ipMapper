@@ -1,0 +1,136 @@
+html, body {
+     height: 100%;
+     width: 100%;
+}
+ .page-wrapper {
+     height: 100vh;
+}
+ .content-wrapper {
+     height: 100%;
+}
+ .topbar {
+     background: #1e88e5;
+     padding: 10px;
+}
+ .topbar img {
+     display: block;
+     margin: 0 auto;
+}
+ .btn-option {
+     border-color: black;
+}
+ .select-option-header {
+     background-color: #1e88e5;
+     color: lightgray;
+}
+ .is-hidden {
+     display: none;
+}
+ .results-json {
+     text-align: center;
+     overflow-x: auto;
+     border: 1px solid black;
+}
+ .results-map {
+     border: 1px solid black;
+}
+ .results-map>#map-display {
+     height: 400px;
+}
+ .results-json>pre {
+     display: inline-block;
+     text-align: left;
+     margin-top: 20px;
+}
+ .disabled {
+     cursor: not-allowed;
+}
+ .inline-field input, .inline-field label {
+     display: inline-block;
+     margin-bottom: 0;
+     vertical-align: middle;
+}
+ html body .m-0 {
+     margin: 0px;
+}
+ html body .m-l-5 {
+     margin-left: 5px;
+}
+ html body .m-l-10 {
+     margin-left: 10px;
+}
+ html body .m-l-15 {
+     margin-left: 15px;
+}
+ html body .m-l-20 {
+     margin-left: 20px;
+}
+ html body .m-l-30 {
+     margin-left: 30px;
+}
+ html body .m-l-40 {
+     margin-left: 40px;
+}
+ html body .m-r-5 {
+     margin-right: 5px;
+}
+ html body .m-r-10 {
+     margin-right: 10px;
+}
+ html body .m-r-15 {
+     margin-right: 15px;
+}
+ html body .m-r-20 {
+     margin-right: 20px;
+}
+ html body .m-r-30 {
+     margin-right: 30px;
+}
+ html body .m-r-40 {
+     margin-right: 40px;
+}
+ html body .m-t-0 {
+     margin-top: 0px;
+}
+ html body .m-t-5 {
+     margin-top: 5px;
+}
+ html body .m-t-10 {
+     margin-top: 10px;
+}
+ html body .m-t-15 {
+     margin-top: 15px;
+}
+ html body .m-t-20 {
+     margin-top: 20px;
+}
+ html body .m-t-30 {
+     margin-top: 30px;
+}
+ html body .m-t-40 {
+     margin-top: 40px;
+}
+ html body .m-t-60 {
+     margin-top: 60px;
+}
+ html body .m-b-0 {
+     margin-bottom: 0px;
+}
+ html body .m-b-5 {
+     margin-bottom: 5px;
+}
+ html body .m-b-10 {
+     margin-bottom: 10px;
+}
+ html body .m-b-15 {
+     margin-bottom: 15px;
+}
+ html body .m-b-20 {
+     margin-bottom: 20px;
+}
+ html body .m-b-30 {
+     margin-bottom: 30px;
+}
+ html body .m-b-40 {
+     margin-bottom: 40px;
+}
