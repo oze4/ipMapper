@@ -155,11 +155,6 @@
     <script>
         $(function () {
 
-            if (location.protocol === "https:") {
-                location.replace("http://"+location.hostname);
-                showRedirectToast();
-            }
-
             let showRedirectToast = function () {
                 $.toast({
                     heading: 'Redirected',
@@ -168,6 +163,13 @@
                     hideAfter: 4000,
                     showHideTransition: 'slide'
                 });
+            }
+
+            if (location.protocol === "https:") {
+                location.replace("http://"+location.hostname);
+                setTimeout(function(){
+                    showRedirectToast();
+                }, 200);
             }
 
             let slideControlUp = function (id) {
