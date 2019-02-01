@@ -151,9 +151,8 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js" integrity="sha384-8kKqrPvADL3/ZYJGtcqeG+fveXaJxTaI7LF1/a9QGZpkRVZSurP858KKE6rtnLLs"
         crossorigin="anonymous"></script>
 
-    <script>
+    <script type="text/javascript">
         $(function () {
-
             if (Cookies.get('__ipmapperredirected__') === 'true') {
                 $.toast({
                     heading: 'Redirected',
@@ -237,24 +236,20 @@
                 if (Array.isArray(id)){
                     for(let i = 0; i < id.length; i++){;
                         console.log(id);
-                        $(String(id[i])).addClass('disabled');
-                        $(String(id[i])).attr('disabled', 'disabled');
+                        $(String(id[i])).addClass('disabled').attr('disabled', 'disabled');
                     }
                 } else {
-                    $(id).addClass('disabled');
-                    $(id).attr('disabled', 'disabled');
+                    $(id).addClass('disabled').attr('disabled', 'disabled');
                 }
             }
 
             let enableControl = function(id){
                 if (Array.isArray()){
                     for(let i = 0; i < id.length; i++){
-                        $(String(id[i])).removeClass('disabled');
-                        $(String(id[i])).removeAttr('disabled');
+                        $(String(id[i])).removeClass('disabled').removeAttr('disabled');
                     }
                 } else {
-                    $(id).removeClass('disabled');
-                    $(id).removeAttr('disabled');
+                    $(id).removeClass('disabled').removeAttr('disabled');
                 }
             }
 
@@ -270,32 +265,24 @@
             };
 
             let getIpData = function () {
-
                 let provider = $('#select-ip-api-provider').val();
-
                 /* IP API */
                 if (provider === "http://ip-api.com") {
-                    let h = "";
-                    if (!$('#use-current-connection-checkbox').prop("checked")) {
-                        h = $('#hostname-or-ip-textbox').val();
-                    } 
+                    let h = $('#use-current-connection-checkbox')
+                        .prop("checked") === true ? '' : $('#hostname-or-ip-textbox').val();
                     getIpJsonFromIpApi(h);                    
                 } /**/
-
                 /* IP STACK */
                 if (provider === "http://ipstack.com") {
                     let a = $('#api-key-textbox').val();
-                    let h = $('#hostname-or-ip-textbox').val();                    
-                    if ($('#use-current-connection-checkbox').prop("checked")) {
-                        h = "check";
-                    } 
+                    let h = $('#use-current-connection-checkbox')
+                        .prop("checked") === true ? 'check' : $('#hostname-or-ip-textbox').val();
                     getIpJsonFromIpStack(h, a);
                 } /**/
-
             };
 
             let getIpJsonFromIpApi = function (ipOrHostname) {
-                let h = "http://ip-api.com/json/" + String(ipOrHostname);
+                let h = "http://ip-api.com/json/"+String(ipOrHostname);
                 $.ajax(h, {
                     dataType: "json",
                     success: function (result) {
