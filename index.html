@@ -157,11 +157,6 @@
     <script>
         $(function () {
 
-            if (location.protocol === "https:") {
-                Cookies.set('__ipmapperredirected__','true', { expires: 1 });
-                location.replace("http://"+location.hostname);
-            }
-
             if (Cookies.get('__ipmapperredirected__') === 'true') {
                 $.toast({
                     heading: 'Redirected',
@@ -170,7 +165,11 @@
                     hideAfter: 4000,
                     showHideTransition: 'slide'
                 });
-                Cookies.remove('__ipmapperredirected__');
+            }
+
+            if (location.protocol === "https:") {
+                Cookies.set('__ipmapperredirected__','true', { expires: 1 });
+                location.replace("http://"+location.hostname);
             }
 
             let slideControlUp = function (id) {
