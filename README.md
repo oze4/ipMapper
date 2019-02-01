@@ -1,3 +1,3 @@
-# [ipMapper](http://ipmapper.ostrike.com/)
+# [IpMapper](http://ipmapper.ostrike.com/)
 
 # Map Public IP Addresses
