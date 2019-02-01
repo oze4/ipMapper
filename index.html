@@ -163,7 +163,10 @@
                     text: "Due to API restrictions, you were redirected to 'http'",
                     icon: 'info',
                     hideAfter: 4000,
-                    showHideTransition: 'slide'
+                    showHideTransition: 'slide',
+                    afterShown: function () {
+                        Cookies.remove('__ipmapperredirected__');
+                    }
                 });
             }
 
