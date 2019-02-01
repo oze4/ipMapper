@@ -157,6 +157,13 @@
 
             if (location.protocol === "https:") {
                 location.replace("http://"+location.hostname);
+                $.toast({
+                    heading: 'Redirected',
+                    text: "Due to API restrictions, you were redirected to 'http'",
+                    icon: 'info',
+                    hideAfter: 4000,
+                    showHideTransition: 'slide'
+                })
             }
 
             let slideControlUp = function (id) {
